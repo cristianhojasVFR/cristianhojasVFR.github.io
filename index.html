@@ -3,477 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin · Roadmap 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{--bg:#f7f6f3;--surface:#fff;--border:rgba(0,0,0,.1);--border-md:rgba(0,0,0,.15);--text:#1a1a18;--muted:#6b6b66;--hint:#9c9a92;--teal:#1D9E75;--teal-bg:#E1F5EE;--teal-text:#0F6E56;--blue:#378ADD;--blue-bg:#E6F1FB;--blue-text:#185FA5;--amber:#EF9F27;--amber-bg:#FAEEDA;--amber-text:#633806;--purple-bg:#EEEDFE;--purple-text:#3C3489;--pink-bg:#FBEAF0;--pink-text:#993556;--red-bg:#FCEBEB;--red-text:#A32D2D;--gray-bg:#F1EFE8;--gray-text:#5F5E5A;--radius:10px;--radius-sm:6px}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
-  #login-screen{position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;align-items:center;justify-content:center}
-  .login-box{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:2rem;width:100%;max-width:360px}
-  .login-box h1{font-size:18px;font-weight:500;margin-bottom:6px}
-  .login-box p{font-size:13px;color:var(--muted);margin-bottom:1.5rem}
-  .login-box input{width:100%;font-size:14px;padding:9px 12px;border:.5px solid var(--border-md);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;margin-bottom:10px}
-  .login-box input:focus{outline:none;border-color:var(--blue)}
-  .login-error{font-size:12px;color:var(--red-text);margin-bottom:8px;display:none}
-  nav{position:sticky;top:0;z-index:50;background:rgba(247,246,243,.93);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
-  .nav-brand{display:flex;align-items:center;gap:10px}
-  .nav-logo{width:28px;height:28px;background:var(--text);border-radius:6px;display:flex;align-items:center;justify-content:center}
-  .nav-title{font-size:14px;font-weight:500}.nav-sub{font-size:12px;color:var(--muted)}
-  .nav-actions{display:flex;gap:8px;align-items:center}
-  .btn{font-size:12px;font-weight:500;padding:7px 16px;border-radius:20px;cursor:pointer;border:.5px solid var(--border-md);background:transparent;color:var(--text);font-family:'DM Sans',sans-serif;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center}
-  .btn:hover{background:var(--bg)}
-  .btn-primary{background:var(--text);color:#fff;border-color:transparent}
-  .btn-primary:hover{opacity:.85}
-  .btn-success{background:var(--teal);color:#fff;border-color:transparent;font-size:13px;padding:8px 20px}
-  .btn-success:hover{opacity:.85}
-  .btn-sm{font-size:11px;padding:4px 10px}
-  .btn-danger{color:var(--red-text);border-color:transparent}
-  .btn-danger:hover{background:var(--red-bg)}
-  main{max-width:1100px;margin:0 auto;padding:2rem 2rem 4rem}
-  .section{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);margin-bottom:1.5rem;overflow:hidden}
-  .section-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:.5px solid var(--border);background:var(--bg)}
-  .section-head h2{font-size:14px;font-weight:500}
-  .section-head p{font-size:12px;color:var(--muted);margin-top:2px}
-  .tbl{width:100%;border-collapse:collapse}
-  .tbl thead th{font-size:10px;font-weight:500;color:var(--hint);padding:9px 10px;text-align:left;background:var(--bg);border-bottom:.5px solid var(--border);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
-  .tbl tbody tr{border-bottom:.5px solid var(--border)}
-  .tbl tbody tr:last-child{border-bottom:none}
-  .tbl tbody tr:hover{background:#fafaf8}
-  .tbl td{padding:8px 10px;font-size:13px;vertical-align:middle}
-  .f-input{font-size:12px;padding:5px 8px;border:.5px solid var(--border-md);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;width:100%}
-  .f-input:focus{outline:none;border-color:var(--blue)}
-  select.f-input{cursor:pointer}
-  .add-form{padding:1rem 1.25rem;background:#fafaf8;border-top:.5px solid var(--border);display:none}
-  .add-form.open{display:block}
-  .row5{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px}
-  .row2{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-bottom:10px}
-  .add-form label{font-size:10px;font-weight:500;color:var(--hint);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px}
-  .export-box{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:1.75rem;text-align:center}
-  .export-box h2{font-size:16px;font-weight:500;margin-bottom:6px}
-  .export-box p{font-size:13px;color:var(--muted);margin-bottom:1.25rem;line-height:1.6}
-  .steps{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem}
-  .step{background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius-sm);padding:.5rem .875rem;font-size:12px;color:var(--muted)}
-  .step strong{color:var(--text)}
-  .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;font-size:13px;font-weight:500;padding:.625rem 1.25rem;border-radius:20px;opacity:0;transition:all .25s;pointer-events:none;z-index:300}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  .hidden{display:none!important}
-</style>
-</head>
-<body>
-
-<div id="login-screen">
-  <div class="login-box">
-    <h1>Admin · Roadmap 2026</h1>
-    <p>Ingresa la contraseña para editar el roadmap.</p>
-    <input type="password" id="pwd" placeholder="Contraseña" onkeydown="if(event.key==='Enter')login()">
-    <div class="login-error" id="lerr">Contraseña incorrecta.</div>
-    <button class="btn btn-primary" style="width:100%;padding:9px;justify-content:center" onclick="login()">Entrar</button>
-  </div>
-</div>
-
-<div id="app" class="hidden">
-  <nav>
-    <div class="nav-brand">
-      <div class="nav-logo">
-        <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><rect x="1" y="4" width="12" height="2" rx="1" fill="white"/><rect x="1" y="8" width="8" height="2" rx="1" fill="white"/><rect x="1" y="1" width="5" height="2" rx="1" fill="white" opacity=".5"/></svg>
-      </div>
-      <div>
-        <div class="nav-title">Admin · Roadmap 2026</div>
-        <div class="nav-sub">Panel de edición</div>
-      </div>
-    </div>
-    <div class="nav-actions">
-      <a href="index.html" target="_blank" class="btn btn-sm">Ver roadmap →</a>
-      <button class="btn btn-success" onclick="exportHTML()">⬇ Exportar index.html</button>
-    </div>
-  </nav>
-
-  <main>
-    <div class="section">
-      <div class="section-head">
-        <div>
-          <h2>Iniciativas del roadmap</h2>
-          <p>Edita cualquier campo directamente. Exporta cuando termines.</p>
-        </div>
-        <button class="btn btn-sm btn-primary" onclick="toggleForm('fi')">+ Agregar iniciativa</button>
-      </div>
-      <div style="overflow-x:auto">
-        <table class="tbl">
-          <thead><tr>
-            <th style="min-width:150px">Iniciativa</th>
-            <th style="min-width:130px">Área</th>
-            <th style="min-width:90px">Mes</th>
-            <th style="min-width:145px">Tipo de impacto</th>
-            <th style="min-width:120px">KPI objetivo</th>
-            <th style="min-width:145px">Estado</th>
-            <th style="min-width:220px">Descripción comercial</th>
-            <th style="width:60px"></th>
-          </tr></thead>
-          <tbody id="init-body"></tbody>
-        </table>
-      </div>
-      <div class="add-form" id="fi">
-        <div class="row5">
-          <div><label>Nombre</label><input class="f-input" id="ni-name" placeholder="Nombre"></div>
-          <div><label>Área</label><select class="f-input" id="ni-area"><option>UX</option><option>Medios de pago</option><option>Backend</option><option>Data</option><option>Performance</option></select></div>
-          <div><label>Mes</label><select class="f-input" id="ni-month"><option value="ene">Enero</option><option value="feb">Febrero</option><option value="mar">Marzo</option><option value="abr">Abril</option><option value="may">Mayo</option><option value="jun">Junio</option><option value="jul">Julio</option><option value="ago">Agosto</option><option value="sep">Septiembre</option><option value="oct">Octubre</option><option value="nov">Noviembre</option><option value="dic">Diciembre</option></select></div>
-          <div><label>Impacto</label><select class="f-input" id="ni-impact"><option value="conv">Conversión</option><option value="usab">Usabilidad</option><option value="ret">Retención</option><option value="ticket">Ticket promedio</option><option value="pago">Nuevos medios de pago</option></select></div>
-          <div><label>Estado</label><select class="f-input" id="ni-status"><option value="prod-on">Prod. Activo</option><option value="prod-off">Prod. Inactivo</option><option value="dev">En desarrollo</option><option value="qa">QA</option><option value="plan">Planificado</option><option value="blocked">Bloqueado</option></select></div>
-        </div>
-        <div class="row2">
-          <div><label>KPI objetivo</label><input class="f-input" id="ni-kpi" placeholder="ej: CVR, NPS…"></div>
-          <div><label>Descripción comercial</label><input class="f-input" id="ni-desc" placeholder="Por qué importa al negocio…"></div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-primary btn-sm" onclick="addInit()">Agregar</button>
-          <button class="btn btn-sm" onclick="toggleForm('fi')">Cancelar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-head">
-        <div>
-          <h2>Proyectos rolling</h2>
-          <p>Proyectos pequeños priorizados mes a mes.</p>
-        </div>
-        <button class="btn btn-sm btn-primary" onclick="toggleForm('fp')">+ Agregar proyecto</button>
-      </div>
-      <div style="overflow-x:auto">
-        <table class="tbl">
-          <thead><tr>
-            <th style="min-width:180px">Proyecto</th>
-            <th style="min-width:130px">Área</th>
-            <th style="min-width:90px">Mes</th>
-            <th style="min-width:145px">Tipo de impacto</th>
-            <th style="min-width:145px">Estado</th>
-            <th style="width:60px"></th>
-          </tr></thead>
-          <tbody id="proj-body"></tbody>
-        </table>
-      </div>
-      <div class="add-form" id="fp">
-        <div class="row5">
-          <div><label>Nombre</label><input class="f-input" id="np-name" placeholder="Nombre"></div>
-          <div><label>Área</label><select class="f-input" id="np-area"><option>UX</option><option>Medios de pago</option><option>Backend</option><option>Data</option><option>Performance</option></select></div>
-          <div><label>Mes</label><select class="f-input" id="np-month"><option value="ene">Enero</option><option value="feb">Febrero</option><option value="mar">Marzo</option><option value="abr">Abril</option><option value="may">Mayo</option><option value="jun">Junio</option><option value="jul">Julio</option><option value="ago">Agosto</option><option value="sep">Septiembre</option><option value="oct">Octubre</option><option value="nov">Noviembre</option><option value="dic">Diciembre</option></select></div>
-          <div><label>Impacto</label><select class="f-input" id="np-impact"><option value="conv">Conversión</option><option value="usab">Usabilidad</option><option value="ret">Retención</option><option value="ticket">Ticket promedio</option><option value="pago">Nuevos medios de pago</option></select></div>
-          <div><label>Estado</label><select class="f-input" id="np-status"><option value="prod-on">Prod. Activo</option><option value="prod-off">Prod. Inactivo</option><option value="dev">En desarrollo</option><option value="qa">QA</option><option value="plan">Planificado</option><option value="blocked">Bloqueado</option></select></div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-primary btn-sm" onclick="addProj()">Agregar</button>
-          <button class="btn btn-sm" onclick="toggleForm('fp')">Cancelar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="export-box">
-      <h2>Publicar cambios</h2>
-      <p>Exporta el <code style="font-family:'DM Mono',monospace;font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px">index.html</code> actualizado y súbelo a GitHub.<br>Los stakeholders verán los cambios en segundos.</p>
-      <div class="steps">
-        <div class="step"><strong>1.</strong> Edita arriba</div>
-        <div class="step"><strong>2.</strong> Exportar index.html</div>
-        <div class="step"><strong>3.</strong> Subir a GitHub</div>
-      </div>
-      <button class="btn btn-success" onclick="exportHTML()">⬇ Exportar index.html</button>
-    </div>
-  </main>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-const PWD = 'roadmap2026';
-function login(){
-  if(document.getElementById('pwd').value===PWD){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('app').classList.remove('hidden');
-    render();
-  } else {
-    document.getElementById('lerr').style.display='block';
-  }
-}
-
-const MO_KEYS=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-const MO_S={ene:'Ene',feb:'Feb',mar:'Mar',abr:'Abr',may:'May',jun:'Jun',jul:'Jul',ago:'Ago',sep:'Sep',oct:'Oct',nov:'Nov',dic:'Dic'};
-const AREAS=['UX','Medios de pago','Backend','Data','Performance'];
-const IMPACTS=[{v:'conv',l:'Conversión'},{v:'usab',l:'Usabilidad'},{v:'ret',l:'Retención'},{v:'ticket',l:'Ticket promedio'},{v:'pago',l:'Nuevos medios de pago'}];
-const STATUSES=[{v:'prod-on',l:'Prod. Activo'},{v:'prod-off',l:'Prod. Inactivo'},{v:'dev',l:'En desarrollo'},{v:'qa',l:'QA'},{v:'plan',l:'Planificado'},{v:'blocked',l:'Bloqueado'}];
-
-let D=[
-  {name:'Guest buy',           area:'UX',            month:'mar',impact:'conv',  kpi:'CVR checkout',        status:'prod-on', desc:'Permite comprar sin crear cuenta, reduciendo fricción en el funnel mobile.'},
-  {name:'Klap',                area:'Medios de pago',month:'mar',impact:'pago',  kpi:'TPV / conversión',    status:'prod-on', desc:'Nuevo medio de pago con Klap para ampliar cobertura y reducir abandono.'},
-  {name:'Turbo',               area:'UX',            month:'abr',impact:'usab',  kpi:'Velocidad / NPS',     status:'prod-on', desc:'Mejora de performance en flujos críticos mobile.'},
-  {name:'Fintoc',              area:'Medios de pago',month:'abr',impact:'pago',  kpi:'TPV / CVR',           status:'prod-on', desc:'Integración Fintoc como método de pago bancario directo.'},
-  {name:'ECE',                 area:'Medios de pago',month:'may',impact:'pago',  kpi:'TPV',                 status:'dev',     desc:'Habilitación de pago con ECE para ampliar base de clientes.'},
-  {name:'Banco Estado',        area:'Medios de pago',month:'may',impact:'pago',  kpi:'TPV / cobertura',     status:'dev',     desc:'Integración con Banco Estado, mayor banco retail de Chile.'},
-  {name:'Social Login',        area:'UX',            month:'jun',impact:'conv',  kpi:'CVR registro',        status:'plan',    desc:'Login con Google/Apple para reducir abandono en onboarding.'},
-  {name:'EP',                  area:'UX',            month:'jun',impact:'usab',  kpi:'NPS / satisfacción',  status:'plan',    desc:'Mejoras de experiencia en flujos de navegación mobile.'},
-  {name:'Login Biométrico',    area:'UX',            month:'jul',impact:'conv',  kpi:'CVR login recurrente',status:'plan',    desc:'Autenticación por huella/Face ID para acelerar acceso recurrente.'},
-  {name:'Venta IA',            area:'UX',            month:'ago',impact:'ticket',kpi:'AOV / conversión',    status:'plan',    desc:'Recomendaciones inteligentes en tiempo real para aumentar ticket promedio.'},
-  {name:'Referidos',           area:'UX',            month:'ago',impact:'ret',   kpi:'CAC / retención',     status:'plan',    desc:'Programa de referidos para adquirir usuarios a menor costo.'},
-  {name:'Carrito colaborativo',area:'UX',            month:'sep',impact:'ticket',kpi:'AOV / UX',            status:'plan',    desc:'Compartir y co-editar el carrito entre usuarios.'},
-  {name:'Drag & drop',         area:'UX',            month:'oct',impact:'usab',  kpi:'NPS / usabilidad',    status:'plan',    desc:'Reorganizar ítems del carrito con arrastre.'},
-  {name:'Usabilidad Home',     area:'UX',            month:'oct',impact:'conv',  kpi:'CTR / CVR home',      status:'plan',    desc:'Rediseño de home mobile para mejorar descubrimiento y conversión.'},
-  {name:'Product recs',        area:'UX',            month:'nov',impact:'ticket',kpi:'AOV',                 status:'plan',    desc:'Motor de recomendaciones en PDP para aumentar cross-sell.'},
-  {name:'Repetir 1 clic',      area:'UX',            month:'nov',impact:'conv',  kpi:'CVR recurrente',      status:'plan',    desc:'Recompra con un clic para usuarios recurrentes mobile.'},
-  {name:'Wallet cupones',      area:'UX',            month:'dic',impact:'ret',   kpi:'Retención / CVR',     status:'plan',    desc:'Wallet digital de cupones y beneficios para fidelizar usuarios.'},
-  {name:'Quitar ingredientes', area:'UX',            month:'dic',impact:'usab',  kpi:'NPS / satisfacción',  status:'plan',    desc:'Personalización quitando ingredientes no deseados desde el carrito.'},
-];
-
-let P=[
-  {name:'Optimización checkout mobile',area:'UX',         mes:'may',impact:'conv',status:'dev'},
-  {name:'A/B test CTA producto',       area:'UX',         mes:'may',impact:'conv',status:'plan'},
-  {name:'Fix filtros categoría',       area:'Backend',    mes:'jun',impact:'usab',status:'plan'},
-  {name:'Push notifications',          area:'UX',         mes:'jun',impact:'ret', status:'plan'},
-  {name:'Mejoras speed mobile',        area:'Performance',mes:'jun',impact:'usab',status:'plan'},
-];
-
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-
-// Build select purely via DOM — no inline onchange, no quote nesting issues
-function mkSel(opts, val){
-  const sel = document.createElement('select');
-  sel.className = 'f-input';
-  opts.forEach(o => {
-    const v = typeof o === 'string' ? o : o.v;
-    const l = typeof o === 'string' ? o : o.l;
-    const opt = document.createElement('option');
-    opt.value = v;
-    opt.textContent = l;
-    if(v === val) opt.selected = true;
-    sel.appendChild(opt);
-  });
-  return sel;
-}
-
-function mkInput(val){
-  const inp = document.createElement('input');
-  inp.className = 'f-input';
-  inp.value = val || '';
-  return inp;
-}
-
-function mkTd(content){
-  const td = document.createElement('td');
-  if(typeof content === 'string') td.textContent = content;
-  else td.appendChild(content);
-  return td;
-}
-
-function renderInit(){
-  const tb = document.getElementById('init-body');
-  tb.innerHTML = '';
-  D.forEach((item, i) => {
-    const tr = document.createElement('tr');
-
-    const inpName = mkInput(item.name);
-    inpName.addEventListener('change', () => { D[i].name = inpName.value; });
-
-    const selArea = mkSel(AREAS, item.area);
-    selArea.addEventListener('change', () => { D[i].area = selArea.value; });
-
-    const selMonth = mkSel(MO_KEYS.map(m => ({v:m, l:MO_S[m]})), item.month);
-    selMonth.addEventListener('change', () => { D[i].month = selMonth.value; });
-
-    const selImpact = mkSel(IMPACTS, item.impact);
-    selImpact.addEventListener('change', () => { D[i].impact = selImpact.value; });
-
-    const inpKpi = mkInput(item.kpi);
-    inpKpi.addEventListener('change', () => { D[i].kpi = inpKpi.value; });
-
-    const selStatus = mkSel(STATUSES, item.status);
-    selStatus.addEventListener('change', () => { D[i].status = selStatus.value; });
-
-    const inpDesc = mkInput(item.desc);
-    inpDesc.addEventListener('change', () => { D[i].desc = inpDesc.value; });
-
-    const btnDel = document.createElement('button');
-    btnDel.className = 'btn btn-sm btn-danger';
-    btnDel.textContent = '✕';
-    btnDel.addEventListener('click', () => rmInit(i));
-
-    tr.appendChild(mkTd(inpName));
-    tr.appendChild(mkTd(selArea));
-    tr.appendChild(mkTd(selMonth));
-    tr.appendChild(mkTd(selImpact));
-    tr.appendChild(mkTd(inpKpi));
-    tr.appendChild(mkTd(selStatus));
-    tr.appendChild(mkTd(inpDesc));
-    tr.appendChild(mkTd(btnDel));
-    tb.appendChild(tr);
-  });
-}
-
-function renderProj(){
-  const tb = document.getElementById('proj-body');
-  tb.innerHTML = '';
-  P.forEach((p, i) => {
-    const tr = document.createElement('tr');
-
-    const inpName = mkInput(p.name);
-    inpName.addEventListener('change', () => { P[i].name = inpName.value; });
-
-    const selArea = mkSel(AREAS, p.area);
-    selArea.addEventListener('change', () => { P[i].area = selArea.value; });
-
-    const selMonth = mkSel(MO_KEYS.map(m => ({v:m, l:MO_S[m]})), p.mes);
-    selMonth.addEventListener('change', () => { P[i].mes = selMonth.value; });
-
-    const selImpact = mkSel(IMPACTS, p.impact);
-    selImpact.addEventListener('change', () => { P[i].impact = selImpact.value; });
-
-    const selStatus = mkSel(STATUSES, p.status);
-    selStatus.addEventListener('change', () => { P[i].status = selStatus.value; });
-
-    const btnDel = document.createElement('button');
-    btnDel.className = 'btn btn-sm btn-danger';
-    btnDel.textContent = '✕';
-    btnDel.addEventListener('click', () => rmProj(i));
-
-    tr.appendChild(mkTd(inpName));
-    tr.appendChild(mkTd(selArea));
-    tr.appendChild(mkTd(selMonth));
-    tr.appendChild(mkTd(selImpact));
-    tr.appendChild(mkTd(selStatus));
-    tr.appendChild(mkTd(btnDel));
-    tb.appendChild(tr);
-  });
-}
-
-function render(){renderInit();renderProj();}
-
-// Delete with inline confirm — avoids browser blocking confirm() on file://
-let pendingDel={type:null,idx:null};
-function rmInit(i){
-  pendingDel={type:'D',idx:i};
-  // Show confirm row after the target row
-  clearConfirm();
-  const rows=document.getElementById('init-body').rows;
-  const confirmRow=document.createElement('tr');
-  confirmRow.id='confirm-row';
-  confirmRow.style.background='#FCEBEB';
-  confirmRow.innerHTML='<td colspan="8" style="padding:8px 12px;font-size:12px;color:#A32D2D;display:flex;align-items:center;gap:10px">'
-    +'<span>¿Eliminar <strong>'+esc(D[i].name)+'</strong>?</span>'
-    +'<button class="btn btn-sm" style="background:#A32D2D;color:#fff;border-color:transparent" onclick="confirmDel()">Sí, eliminar</button>'
-    +'<button class="btn btn-sm" onclick="clearConfirm()">Cancelar</button>'
-    +'</td>';
-  rows[i].after(confirmRow);
-}
-function rmProj(i){
-  pendingDel={type:'P',idx:i};
-  clearConfirm();
-  const rows=document.getElementById('proj-body').rows;
-  const confirmRow=document.createElement('tr');
-  confirmRow.id='confirm-row';
-  confirmRow.style.background='#FCEBEB';
-  confirmRow.innerHTML='<td colspan="6" style="padding:8px 12px;font-size:12px;color:#A32D2D;display:flex;align-items:center;gap:10px">'
-    +'<span>¿Eliminar <strong>'+esc(P[i].name)+'</strong>?</span>'
-    +'<button class="btn btn-sm" style="background:#A32D2D;color:#fff;border-color:transparent" onclick="confirmDel()">Sí, eliminar</button>'
-    +'<button class="btn btn-sm" onclick="clearConfirm()">Cancelar</button>'
-    +'</td>';
-  rows[i].after(confirmRow);
-}
-function confirmDel(){
-  if(pendingDel.type==='D'){D.splice(pendingDel.idx,1);renderInit();}
-  else if(pendingDel.type==='P'){P.splice(pendingDel.idx,1);renderProj();}
-  pendingDel={type:null,idx:null};
-  toast('Eliminado');
-}
-function clearConfirm(){
-  const r=document.getElementById('confirm-row');
-  if(r)r.remove();
-  pendingDel={type:null,idx:null};
-}
-function toggleForm(id){document.getElementById(id).classList.toggle('open');}
-
-function addInit(){
-  const name=document.getElementById('ni-name').value.trim();
-  if(!name){alert('El nombre es obligatorio.');return;}
-  D.push({name,area:document.getElementById('ni-area').value,month:document.getElementById('ni-month').value,impact:document.getElementById('ni-impact').value,kpi:document.getElementById('ni-kpi').value,status:document.getElementById('ni-status').value,desc:document.getElementById('ni-desc').value});
-  ['ni-name','ni-kpi','ni-desc'].forEach(id=>document.getElementById(id).value='');
-  toggleForm('fi');renderInit();toast('Iniciativa agregada');
-}
-function addProj(){
-  const name=document.getElementById('np-name').value.trim();
-  if(!name){alert('El nombre es obligatorio.');return;}
-  P.push({name,area:document.getElementById('np-area').value,mes:document.getElementById('np-month').value,impact:document.getElementById('np-impact').value,status:document.getElementById('np-status').value});
-  document.getElementById('np-name').value='';
-  toggleForm('fp');renderProj();toast('Proyecto agregado');
-}
-
-// EXPORT — data encoded as base64 to survive any special characters
-function exportHTML(){
-  const dateStr=new Date().toLocaleDateString('es-CL',{day:'numeric',month:'long',year:'numeric'});
-  // Encode data safely
-  const payload=btoa(unescape(encodeURIComponent(JSON.stringify({D,P}))));
-
-  const html=`<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Roadmap Producto 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f6f3;--surface:#fff;--border:rgba(0,0,0,.1);--text:#1a1a18;--muted:#6b6b66;--hint:#9c9a92;--teal:#1D9E75;--teal-bg:#E1F5EE;--teal-text:#0F6E56;--blue:#378ADD;--blue-bg:#E6F1FB;--blue-text:#185FA5;--amber:#EF9F27;--amber-bg:#FAEEDA;--amber-text:#633806;--purple-bg:#EEEDFE;--purple-text:#3C3489;--pink-bg:#FBEAF0;--pink-text:#993556;--red-bg:#FCEBEB;--red-text:#A32D2D;--gray-bg:#F1EFE8;--gray-text:#5F5E5A;--radius:10px;--radius-sm:6px}
+:root{--bg:#f7f6f3;--s:#fff;--b:rgba(0,0,0,.1);--t:#1a1a18;--m:#6b6b66;--h:#9c9a92;--teal:#1D9E75;--tbg:#E1F5EE;--ttx:#0F6E56;--blue:#378ADD;--bbg:#E6F1FB;--btx:#185FA5;--amb:#EF9F27;--abg:#FAEEDA;--atx:#633806;--pbg:#EEEDFE;--ptx:#3C3489;--ikbg:#FBEAF0;--iktx:#993556;--rbg:#FCEBEB;--rtx:#A32D2D;--gbg:#F1EFE8;--gtx:#5F5E5A;--r:10px;--rs:6px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
-nav{position:sticky;top:0;z-index:50;background:rgba(247,246,243,.93);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--t);min-height:100vh;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:50;background:rgba(247,246,243,.93);backdrop-filter:blur(12px);border-bottom:.5px solid var(--b);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px}
 .nb{display:flex;align-items:center;gap:10px}
-.nl{width:28px;height:28px;background:var(--text);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.nt{font-size:14px;font-weight:500}.ns{font-size:12px;color:var(--muted)}.nm{font-size:11px;color:var(--hint);font-family:'DM Mono',monospace}
+.nl{width:28px;height:28px;background:var(--t);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nt{font-size:14px;font-weight:500}.ns{font-size:12px;color:var(--m)}.nm{font-size:11px;color:var(--h);font-family:'DM Mono',monospace}
 main{max-width:1280px;margin:0 auto;padding:2rem 2rem 4rem}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.75rem}
 @media(max-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
-.card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem}
-.cl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.cv{font-size:28px;font-weight:500;line-height:1;margin-bottom:4px}.cs{font-size:12px;color:var(--hint)}
-.now{background:var(--amber-bg);border:.5px solid #FAC775;border-radius:var(--radius-sm);padding:.75rem 1rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem}
-.nd{width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;animation:pulse 2s infinite}
+.card{background:var(--s);border:.5px solid var(--b);border-radius:var(--r);padding:1rem 1.25rem}
+.cl{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.cv{font-size:28px;font-weight:500;line-height:1;margin-bottom:4px}.cs{font-size:12px;color:var(--h)}
+.now{background:var(--abg);border:.5px solid #FAC775;border-radius:var(--rs);padding:.75rem 1rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem}
+.nd{width:8px;height:8px;border-radius:50%;background:var(--amb);flex-shrink:0;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.nl2{font-size:12px;font-weight:500;color:var(--amber-text)}
+.nl2{font-size:12px;font-weight:500;color:var(--atx)}
 .nps{display:flex;gap:6px;flex-wrap:wrap}
-.np{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:#fff;border:.5px solid #FAC775;color:var(--amber-text)}
+.np{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:#fff;border:.5px solid #FAC775;color:var(--atx)}
 .tabs{display:flex;gap:6px;margin-bottom:1.25rem}
-.tab{font-size:13px;font-weight:500;padding:6px 16px;border-radius:20px;border:.5px solid rgba(0,0,0,.15);cursor:pointer;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif}
-.tab.on{background:var(--text);color:#fff;border-color:transparent}
+.tab{font-size:13px;font-weight:500;padding:6px 16px;border-radius:20px;border:.5px solid rgba(0,0,0,.15);cursor:pointer;background:transparent;color:var(--m);font-family:'DM Sans',sans-serif;transition:all .15s}
+.tab.on{background:var(--t);color:#fff;border-color:transparent}
 .leg{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
-.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
-.ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}.ls{width:1px;height:14px;background:var(--border)}
-.tw{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);overflow:hidden;overflow-x:auto}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--m)}
+.ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}.lsp{width:1px;height:14px;background:var(--b)}
+.tw{background:var(--s);border:.5px solid var(--b);border-radius:var(--r);overflow:hidden;overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:900px}
-thead th{font-size:10px;font-weight:500;color:var(--hint);padding:10px 8px;text-align:center;background:var(--bg);border-bottom:.5px solid var(--border);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+thead th{font-size:10px;font-weight:500;color:var(--h);padding:10px 8px;text-align:center;background:var(--bg);border-bottom:.5px solid var(--b);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
 thead th.tl{text-align:left;padding:10px 16px;min-width:160px}
-thead th.tc{color:var(--amber-text);font-weight:700;background:#fdf4e3}
-tbody tr{border-bottom:.5px solid var(--border)}tbody tr:last-child{border-bottom:none}tbody tr:hover{background:var(--bg)}
+thead th.tc{color:var(--atx);font-weight:700;background:#fdf4e3}
+tbody tr{border-bottom:.5px solid var(--b)}tbody tr:last-child{border-bottom:none}tbody tr:hover{background:var(--bg)}
 td{padding:0;vertical-align:middle}
 td.tn{font-size:13px;font-weight:500;padding:11px 16px}td.ta,td.ti,td.ts{padding:11px 8px}
-td.tk{font-size:11px;color:var(--muted);padding:11px 8px;font-family:'DM Mono',monospace}
+td.tk{font-size:11px;color:var(--m);padding:11px 8px;font-family:'DM Mono',monospace}
 td.tm{padding:6px 3px;text-align:center;width:44px}td.tmc{background:#fdf4e3}
 .bar{height:22px;border-radius:4px;width:100%}.bux{background:var(--teal)}.bpg{background:var(--blue)}
 .badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap}
-.bux2{background:var(--teal-bg);color:var(--teal-text)}.bpg2{background:var(--blue-bg);color:var(--blue-text)}
-.bcv{background:var(--pink-bg);color:var(--pink-text)}.bus{background:var(--teal-bg);color:var(--teal-text)}
-.bre{background:var(--purple-bg);color:var(--purple-text)}.bti{background:var(--amber-bg);color:var(--amber-text)}.bpa{background:var(--blue-bg);color:var(--blue-text)}
+.bux2{background:var(--tbg);color:var(--ttx)}.bpg2{background:var(--bbg);color:var(--btx)}
+.bcv{background:var(--ikbg);color:var(--iktx)}.bus{background:var(--tbg);color:var(--ttx)}
+.bre{background:var(--pbg);color:var(--ptx)}.bti{background:var(--abg);color:var(--atx)}.bpa{background:var(--bbg);color:var(--btx)}
 .est{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;border:.5px solid transparent}
 .ed{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.spo{background:var(--teal-bg);color:var(--teal-text);border-color:#5DCAA5}
-.spf{background:var(--gray-bg);color:var(--gray-text);border-color:#B4B2A9}
-.sdv{background:var(--amber-bg);color:var(--amber-text);border-color:#FAC775}
-.sqa{background:var(--purple-bg);color:var(--purple-text);border-color:#AFA9EC}
-.spl{background:var(--blue-bg);color:var(--blue-text);border-color:#85B7EB}
-.sbl{background:var(--red-bg);color:var(--red-text);border-color:#F09595}
-.dpo{background:var(--teal)}.dpf{background:#888780}.ddv{background:var(--amber)}.dqa{background:#7F77DD}.dpl{background:var(--blue)}.dbl{background:#E24B4A}
+.spo{background:var(--tbg);color:var(--ttx);border-color:#5DCAA5}
+.spf{background:var(--gbg);color:var(--gtx);border-color:#B4B2A9}
+.sdv{background:var(--abg);color:var(--atx);border-color:#FAC775}
+.sqa{background:var(--pbg);color:var(--ptx);border-color:#AFA9EC}
+.spl{background:var(--bbg);color:var(--btx);border-color:#85B7EB}
+.sbl{background:var(--rbg);color:var(--rtx);border-color:#F09595}
+.dpo{background:var(--teal)}.dpf{background:#888780}.ddv{background:var(--amb)}.dqa{background:#7F77DD}.dpl{background:var(--blue)}.dbl{background:#E24B4A}
 .pt{width:100%;border-collapse:collapse}
-.pt th{font-size:10px;font-weight:500;color:var(--hint);padding:10px 14px;text-align:left;background:var(--bg);border-bottom:.5px solid var(--border);text-transform:uppercase;letter-spacing:.06em}
-.pt td{font-size:13px;padding:11px 14px;border-bottom:.5px solid var(--border);color:var(--text);vertical-align:middle}
+.pt th{font-size:10px;font-weight:500;color:var(--h);padding:10px 14px;text-align:left;background:var(--bg);border-bottom:.5px solid var(--b);text-transform:uppercase;letter-spacing:.06em}
+.pt td{font-size:13px;padding:11px 14px;border-bottom:.5px solid var(--b);color:var(--t);vertical-align:middle}
 .pt tr:last-child td{border-bottom:none}.pt tr:hover td{background:var(--bg)}
-footer{text-align:center;padding:2rem;font-size:11px;color:var(--hint);border-top:.5px solid var(--border);margin-top:3rem;font-family:'DM Mono',monospace}
+footer{text-align:center;padding:2rem;font-size:11px;color:var(--h);border-top:.5px solid var(--b);margin-top:3rem;font-family:'DM Mono',monospace}
 .hidden{display:none!important}
 </style>
 </head>
@@ -483,20 +70,20 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--hint);border-to
     <div class="nl"><svg viewBox="0 0 14 14" fill="none" width="14" height="14"><rect x="1" y="4" width="12" height="2" rx="1" fill="white"/><rect x="1" y="8" width="8" height="2" rx="1" fill="white"/><rect x="1" y="1" width="5" height="2" rx="1" fill="white" opacity=".5"/></svg></div>
     <div><div class="nt">Roadmap Producto 2026</div><div class="ns">Adobe Commerce Cloud · Mobile-first</div></div>
   </div>
-  <div class="nm">Actualizado ${dateStr}</div>
+  <div class="nm">Actualizado 13 de mayo de 2026</div>
 </nav>
 <main>
   <div class="cards" id="sc"></div>
-  <div class="now" id="ns"></div>
+  <div class="now"   id="ns"></div>
   <div class="tabs">
     <button class="tab on" onclick="sw('g',this)">Roadmap</button>
-    <button class="tab" onclick="sw('p',this)">Proyectos rolling</button>
+    <button class="tab"    onclick="sw('p',this)">Proyectos rolling</button>
   </div>
   <div id="pg">
     <div class="leg">
       <div class="li"><div class="ld" style="background:var(--teal)"></div>UX / Producto</div>
       <div class="li"><div class="ld" style="background:var(--blue)"></div>Medios de pago</div>
-      <div class="ls"></div>
+      <div class="lsp"></div>
       <div class="li"><div class="ld dpo"></div>Prod. Activo</div>
       <div class="li"><div class="ld dpf"></div>Prod. Inactivo</div>
       <div class="li"><div class="ld ddv"></div>En desarrollo</div>
@@ -507,9 +94,12 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--hint);border-to
     <div class="tw"><table>
       <thead><tr>
         <th class="tl">Iniciativa</th>
-        <th style="min-width:90px">Área</th><th style="min-width:120px">Tipo de impacto</th>
-        <th style="min-width:100px">KPI objetivo</th><th style="min-width:130px">Estado</th>
-        <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th><th class="tc">May</th>
+        <th style="min-width:90px">Área</th>
+        <th style="min-width:120px">Tipo de impacto</th>
+        <th style="min-width:100px">KPI objetivo</th>
+        <th style="min-width:130px">Estado</th>
+        <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th>
+        <th class="tc">May</th>
         <th>Jun</th><th>Jul</th><th>Ago</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
       </tr></thead>
       <tbody id="gb"></tbody>
@@ -520,42 +110,80 @@ footer{text-align:center;padding:2rem;font-size:11px;color:var(--hint);border-to
       <thead><tr><th>Proyecto</th><th>Área</th><th>Mes</th><th>Tipo de impacto</th><th>Estado</th></tr></thead>
       <tbody id="pb"></tbody>
     </table></div>
-    <p style="font-size:11px;color:var(--hint);margin-top:.75rem">Proyectos pequeños priorizados mes a mes.</p>
+    <p style="font-size:11px;color:var(--h);margin-top:.75rem">Proyectos pequeños priorizados mes a mes.</p>
   </div>
 </main>
-<footer>Roadmap Producto 2026 · Actualizado ${dateStr} · Solo lectura</footer>
+<footer>Roadmap Producto 2026 &middot; Actualizado 13 de mayo de 2026 &middot; Solo lectura</footer>
 <script>
-// Data decoded from base64 — immune to special character issues
-const _raw=atob('${payload}');
-const _txt=decodeURIComponent(escape(_raw));
-const _data=JSON.parse(_txt);
-const D=_data.D, P=_data.P;
-const MO=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-const CUR='may';
-const IL={conv:'Conversión',usab:'Usabilidad',ret:'Retención',ticket:'Ticket promedio',pago:'Nuevos medios de pago'};
-const IC={conv:'bcv',usab:'bus',ret:'bre',ticket:'bti',pago:'bpa'};
-const SL={'prod-on':'Prod. Activo','prod-off':'Prod. Inactivo',dev:'En desarrollo',qa:'QA',plan:'Planificado',blocked:'Bloqueado'};
-const SC={'prod-on':'spo','prod-off':'spf',dev:'sdv',qa:'sqa',plan:'spl',blocked:'sbl'};
-const SD={'prod-on':'dpo','prod-off':'dpf',dev:'ddv',qa:'dqa',plan:'dpl',blocked:'dbl'};
-function rS(){const t=D.length,a=D.filter(d=>d.status==='prod-on').length,v=D.filter(d=>d.status==='dev'||d.status==='qa').length,b=D.filter(d=>d.status==='blocked').length;document.getElementById('sc').innerHTML='<div class="card"><div class="cl">Total iniciativas</div><div class="cv">'+t+'</div><div class="cs">año 2026</div></div><div class="card"><div class="cl">En producción</div><div class="cv" style="color:var(--teal)">'+a+'</div><div class="cs">'+Math.round(a/t*100)+'% del roadmap</div></div><div class="card"><div class="cl">En curso</div><div class="cv" style="color:var(--amber-text)">'+v+'</div><div class="cs">dev + QA</div></div><div class="card"><div class="cl">Bloqueadas</div><div class="cv" style="color:'+(b>0?'#A32D2D':'var(--text)')+'">'+b+'</div><div class="cs">'+(b===0?'Sin bloqueos':'requieren atención')+'</div></div>';}
-function rN(){const ci=D.filter(d=>d.month===CUR);document.getElementById('ns').innerHTML='<div class="nd"></div><span class="nl2">En foco ahora — mayo 2026 &nbsp;</span><div class="nps">'+ci.map(d=>'<span class="np">'+d.name+'</span>').join('')+'</div>';}
-function rG(){const tb=document.getElementById('gb');tb.innerHTML='';D.forEach(item=>{const ac=item.area==='UX'?'bux2':'bpg2',bc=item.area==='UX'?'bux':'bpg';let c='';MO.forEach(m=>{const cc=m===CUR?' tmc':'';c+=m===item.month?'<td class="tm'+cc+'"><div class="bar '+bc+'"></div></td>':'<td class="tm'+cc+'"></td>';});const tr=document.createElement('tr');tr.title=item.desc||'';tr.innerHTML='<td class="tn">'+item.name+'</td><td class="ta"><span class="badge '+ac+'">'+item.area+'</span></td><td class="ti"><span class="badge '+IC[item.impact]+'">'+IL[item.impact]+'</span></td><td class="tk">'+item.kpi+'</td><td class="ts"><span class="est '+SC[item.status]+'"><span class="ed '+SD[item.status]+'"></span>'+SL[item.status]+'</span></td>'+c;tb.appendChild(tr);});}
-function rP(){const tb=document.getElementById('pb');tb.innerHTML='';P.forEach(p=>{const ac=p.area==='UX'?'bux2':'bpg2';const tr=document.createElement('tr');tr.innerHTML='<td style="font-weight:500">'+p.name+'</td><td><span class="badge '+ac+'">'+p.area+'</span></td><td style="color:var(--muted);font-size:12px">'+p.mes.charAt(0).toUpperCase()+p.mes.slice(1)+'</td><td><span class="badge '+IC[p.impact]+'">'+IL[p.impact]+'</span></td><td><span class="est '+SC[p.status]+'"><span class="ed '+SD[p.status]+'"></span>'+SL[p.status]+'</span></td>';tb.appendChild(tr);});}
-function sw(n,el){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');document.getElementById('pg').classList.toggle('hidden',n!=='g');document.getElementById('pp').classList.toggle('hidden',n!=='p');}
-rS();rN();rG();rP();
-<\/script>
-</body>
-</html>`;
+(function(){
+  var raw = atob('eyJEIjpbeyJuYW1lIjoiR3Vlc3QgYnV5IiwiYXJlYSI6IlVYIiwibW9udGgiOiJtYXIiLCJpbXBhY3QiOiJjb252Iiwia3BpIjoiQ1ZSIGNoZWNrb3V0Iiwic3RhdHVzIjoicHJvZC1vbiIsImRlc2MiOiJQZXJtaXRlIGNvbXByYXIgc2luIGNyZWFyIGN1ZW50YSwgcmVkdWNpZW5kbyBmcmljY2nDs24gZW4gZWwgZnVubmVsIG1vYmlsZS4ifSx7Im5hbWUiOiJLbGFwIiwiYXJlYSI6Ik1lZGlvcyBkZSBwYWdvIiwibW9udGgiOiJtYXIiLCJpbXBhY3QiOiJwYWdvIiwia3BpIjoiVFBWIC8gY29udmVyc2nDs24iLCJzdGF0dXMiOiJwcm9kLW9uIiwiZGVzYyI6Ik51ZXZvIG1lZGlvIGRlIHBhZ28gY29uIEtsYXAgcGFyYSBhbXBsaWFyIGNvYmVydHVyYSB5IHJlZHVjaXIgYWJhbmRvbm8uIn0seyJuYW1lIjoiVHVyYm8iLCJhcmVhIjoiVVgiLCJtb250aCI6ImFiciIsImltcGFjdCI6InVzYWIiLCJrcGkiOiJWZWxvY2lkYWQgLyBOUFMiLCJzdGF0dXMiOiJwcm9kLW9uIiwiZGVzYyI6Ik1lam9yYSBkZSBwZXJmb3JtYW5jZSBlbiBmbHVqb3MgY3LDrXRpY29zIG1vYmlsZS4ifSx7Im5hbWUiOiJGaW50b2MiLCJhcmVhIjoiTWVkaW9zIGRlIHBhZ28iLCJtb250aCI6ImFiciIsImltcGFjdCI6InBhZ28iLCJrcGkiOiJUUFYgLyBDVlIiLCJzdGF0dXMiOiJwcm9kLW9uIiwiZGVzYyI6IkludGVncmFjacOzbiBGaW50b2MgY29tbyBtw6l0b2RvIGRlIHBhZ28gYmFuY2FyaW8gZGlyZWN0by4ifSx7Im5hbWUiOiJFQ0UiLCJhcmVhIjoiTWVkaW9zIGRlIHBhZ28iLCJtb250aCI6Im1heSIsImltcGFjdCI6InBhZ28iLCJrcGkiOiJUUFYiLCJzdGF0dXMiOiJkZXYiLCJkZXNjIjoiSGFiaWxpdGFjacOzbiBkZSBwYWdvIGNvbiBFQ0UgcGFyYSBhbXBsaWFyIGJhc2UgZGUgY2xpZW50ZXMuIn0seyJuYW1lIjoiQmFuY28gRXN0YWRvIiwiYXJlYSI6Ik1lZGlvcyBkZSBwYWdvIiwibW9udGgiOiJtYXkiLCJpbXBhY3QiOiJwYWdvIiwia3BpIjoiVFBWIC8gY29iZXJ0dXJhIiwic3RhdHVzIjoiZGV2IiwiZGVzYyI6IkludGVncmFjacOzbiBjb24gQmFuY28gRXN0YWRvLCBtYXlvciBiYW5jbyByZXRhaWwgZGUgQ2hpbGUuIn0seyJuYW1lIjoiU29jaWFsIExvZ2luIiwiYXJlYSI6IlVYIiwibW9udGgiOiJqdW4iLCJpbXBhY3QiOiJjb252Iiwia3BpIjoiQ1ZSIHJlZ2lzdHJvIiwic3RhdHVzIjoicGxhbiIsImRlc2MiOiJMb2dpbiBjb24gR29vZ2xlL0FwcGxlIHBhcmEgcmVkdWNpciBhYmFuZG9ubyBlbiBvbmJvYXJkaW5nLiJ9LHsibmFtZSI6IkVQIiwiYXJlYSI6IlVYIiwibW9udGgiOiJqdW4iLCJpbXBhY3QiOiJ1c2FiIiwia3BpIjoiTlBTIC8gc2F0aXNmYWNjacOzbiIsInN0YXR1cyI6InBsYW4iLCJkZXNjIjoiTWVqb3JhcyBkZSBleHBlcmllbmNpYSBlbiBmbHVqb3MgZGUgbmF2ZWdhY2nDs24gbW9iaWxlLiJ9LHsibmFtZSI6IkxvZ2luIEJpb23DqXRyaWNvIiwiYXJlYSI6IlVYIiwibW9udGgiOiJqdWwiLCJpbXBhY3QiOiJjb252Iiwia3BpIjoiQ1ZSIGxvZ2luIHJlY3VycmVudGUiLCJzdGF0dXMiOiJwbGFuIiwiZGVzYyI6IkF1dGVudGljYWNpw7NuIHBvciBodWVsbGEvRmFjZSBJRCBwYXJhIGFjZWxlcmFyIGFjY2VzbyByZWN1cnJlbnRlLiJ9LHsibmFtZSI6IlZlbnRhIElBIiwiYXJlYSI6IlVYIiwibW9udGgiOiJhZ28iLCJpbXBhY3QiOiJ0aWNrZXQiLCJrcGkiOiJBT1YgLyBjb252ZXJzacOzbiIsInN0YXR1cyI6InBsYW4iLCJkZXNjIjoiUmVjb21lbmRhY2lvbmVzIGludGVsaWdlbnRlcyBlbiB0aWVtcG8gcmVhbCBwYXJhIGF1bWVudGFyIHRpY2tldCBwcm9tZWRpby4ifSx7Im5hbWUiOiJDUk8gSUEiLCJhcmVhIjoiVVgiLCJtb250aCI6ImFnbyIsImltcGFjdCI6InJldCIsImtwaSI6IkNBQyAvIHJldGVuY2nDs24iLCJzdGF0dXMiOiJwbGFuIiwiZGVzYyI6IlByb2dyYW1hIGRlIHJlZmVyaWRvcyBwYXJhIGFkcXVpcmlyIHVzdWFyaW9zIGEgbWVub3IgY29zdG8uIn0seyJuYW1lIjoiQ2Fycml0byBjb2xhYm9yYXRpdm8iLCJhcmVhIjoiVVgiLCJtb250aCI6InNlcCIsImltcGFjdCI6InRpY2tldCIsImtwaSI6IkFPViAvIFVYIiwic3RhdHVzIjoicGxhbiIsImRlc2MiOiJDb21wYXJ0aXIgeSBjby1lZGl0YXIgZWwgY2Fycml0byBlbnRyZSB1c3Vhcmlvcy4ifSx7Im5hbWUiOiJEcmFnICYgZHJvcCIsImFyZWEiOiJVWCIsIm1vbnRoIjoib2N0IiwiaW1wYWN0IjoidXNhYiIsImtwaSI6Ik5QUyAvIHVzYWJpbGlkYWQiLCJzdGF0dXMiOiJwbGFuIiwiZGVzYyI6IlJlb3JnYW5pemFyIMOtdGVtcyBkZWwgY2Fycml0byBjb24gYXJyYXN0cmUgcGFyYSBtZWpvcmFyIGV4cGVyaWVuY2lhLiJ9LHsibmFtZSI6IlVzYWJpbGlkYWQgSG9tZSIsImFyZWEiOiJVWCIsIm1vbnRoIjoib2N0IiwiaW1wYWN0IjoiY29udiIsImtwaSI6IkNUUiAvIENWUiBob21lIiwic3RhdHVzIjoicGxhbiIsImRlc2MiOiJSZWRpc2XDsW8gZGUgaG9tZSBtb2JpbGUgcGFyYSBtZWpvcmFyIGRlc2N1YnJpbWllbnRvIHkgY29udmVyc2nDs24uIn0seyJuYW1lIjoiUHJvZHVjdCByZWNzIiwiYXJlYSI6IlVYIiwibW9udGgiOiJub3YiLCJpbXBhY3QiOiJ0aWNrZXQiLCJrcGkiOiJBT1YiLCJzdGF0dXMiOiJwbGFuIiwiZGVzYyI6Ik1vdG9yIGRlIHJlY29tZW5kYWNpb25lcyBlbiBQRFAgcGFyYSBhdW1lbnRhciBjcm9zcy1zZWxsLiJ9LHsibmFtZSI6IlJlcGV0aXIgMSBjbGljIiwiYXJlYSI6IlVYIiwibW9udGgiOiJub3YiLCJpbXBhY3QiOiJjb252Iiwia3BpIjoiQ1ZSIHJlY3VycmVudGUiLCJzdGF0dXMiOiJwbGFuIiwiZGVzYyI6IlJlY29tcHJhIGNvbiB1biBjbGljIHBhcmEgdXN1YXJpb3MgcmVjdXJyZW50ZXMgbW9iaWxlLiJ9LHsibmFtZSI6IldhbGxldCBjdXBvbmVzIiwiYXJlYSI6IlVYIiwibW9udGgiOiJkaWMiLCJpbXBhY3QiOiJyZXQiLCJrcGkiOiJSZXRlbmNpw7NuIC8gQ1ZSIiwic3RhdHVzIjoicGxhbiIsImRlc2MiOiJXYWxsZXQgZGlnaXRhbCBkZSBjdXBvbmVzIHkgYmVuZWZpY2lvcyBwYXJhIGZpZGVsaXphciB1c3Vhcmlvcy4ifSx7Im5hbWUiOiJRdWl0YXIgaW5ncmVkaWVudGVzIiwiYXJlYSI6IlVYIiwibW9udGgiOiJkaWMiLCJpbXBhY3QiOiJ1c2FiIiwia3BpIjoiTlBTIC8gc2F0aXNmYWNjacOzbiIsInN0YXR1cyI6InBsYW4iLCJkZXNjIjoiUGVyc29uYWxpemFjacOzbiBxdWl0YW5kbyBpbmdyZWRpZW50ZXMgbm8gZGVzZWFkb3MgZGVzZGUgZWwgY2Fycml0by4ifV0sIlAiOlt7Im5hbWUiOiJJbnRlZ3JhY2nDs24gRG90IERpZ2l0YWwiLCJhcmVhIjoiUGVyZm9ybWFuY2UiLCJtZXMiOiJtYXkiLCJpbXBhY3QiOiJyZXQiLCJzdGF0dXMiOiJkZXYifSx7Im5hbWUiOiJDUk8gSUEgSW5mb3JtZSIsImFyZWEiOiJVWCIsIm1lcyI6Im1heSIsImltcGFjdCI6ImNvbnYiLCJzdGF0dXMiOiJwbGFuIn0seyJuYW1lIjoiVmVudGEgc3VnZXN0aXZhIiwiYXJlYSI6IlVYIiwibWVzIjoibWF5IiwiaW1wYWN0IjoidGlja2V0Iiwic3RhdHVzIjoicGxhbiJ9LHsibmFtZSI6IkVzdGFiaWxpemFjacOzbiBGaW50b2MiLCJhcmVhIjoiVVgiLCJtZXMiOiJtYXkiLCJpbXBhY3QiOiJjb252Iiwic3RhdHVzIjoicGxhbiJ9LHsibmFtZSI6Ik1lam9yYXMgcGVyZm9ybWFuY2Ugc2l0aW8iLCJhcmVhIjoiUGVyZm9ybWFuY2UiLCJtZXMiOiJtYXkiLCJpbXBhY3QiOiJ1c2FiIiwic3RhdHVzIjoicGxhbiJ9XX0=');
+  var txt = decodeURIComponent(escape(raw));
+  var data = JSON.parse(txt);
+  var D = data.D, P = data.P;
+  var MO=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var CUR='may';
+  var IL={conv:'Conversión',usab:'Usabilidad',ret:'Retención',ticket:'Ticket promedio',pago:'Nuevos medios de pago'};
+  var IC={conv:'bcv',usab:'bus',ret:'bre',ticket:'bti',pago:'bpa'};
+  var SL={'prod-on':'Prod. Activo','prod-off':'Prod. Inactivo',dev:'En desarrollo',qa:'QA',plan:'Planificado',blocked:'Bloqueado'};
+  var SC={'prod-on':'spo','prod-off':'spf',dev:'sdv',qa:'sqa',plan:'spl',blocked:'sbl'};
+  var SD={'prod-on':'dpo','prod-off':'dpf',dev:'ddv',qa:'dqa',plan:'dpl',blocked:'dbl'};
 
-  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='index.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  toast('index.html exportado — súbelo a GitHub');
-}
+  function rS(){
+    var t=D.length,a=D.filter(function(d){return d.status==='prod-on'}).length,
+        v=D.filter(function(d){return d.status==='dev'||d.status==='qa'}).length,
+        b=D.filter(function(d){return d.status==='blocked'}).length;
+    document.getElementById('sc').innerHTML=
+      '<div class="card"><div class="cl">Total iniciativas</div><div class="cv">'+t+'</div><div class="cs">año 2026</div></div>'+
+      '<div class="card"><div class="cl">En producción</div><div class="cv" style="color:var(--teal)">'+a+'</div><div class="cs">'+Math.round(a/t*100)+'% del roadmap</div></div>'+
+      '<div class="card"><div class="cl">En curso</div><div class="cv" style="color:var(--atx)">'+v+'</div><div class="cs">dev + QA</div></div>'+
+      '<div class="card"><div class="cl">Bloqueadas</div><div class="cv" style="color:'+(b>0?'#A32D2D':'var(--t)')+'">'+b+'</div><div class="cs">'+(b===0?'Sin bloqueos':'requieren atención')+'</div></div>';
+  }
+  function rN(){
+    var ci=D.filter(function(d){return d.month===CUR});
+    document.getElementById('ns').innerHTML=
+      '<div class="nd"></div><span class="nl2">En foco ahora &mdash; mayo 2026 &nbsp;</span>'+
+      '<div class="nps">'+ci.map(function(d){return '<span class="np">'+d.name+'</span>'}).join('')+'</div>';
+  }
+  function rG(){
+    var tb=document.getElementById('gb'); tb.innerHTML='';
+    D.forEach(function(item){
+      var ac=item.area==='UX'?'bux2':'bpg2', bc=item.area==='UX'?'bux':'bpg';
+      var cells='';
+      MO.forEach(function(m){
+        var cc=m===CUR?' tmc':'';
+        cells+=m===item.month?'<td class="tm'+cc+'"><div class="bar '+bc+'"></div></td>':'<td class="tm'+cc+'"></td>';
+      });
+      var tr=document.createElement('tr'); tr.title=item.desc||'';
+      tr.innerHTML='<td class="tn">'+item.name+'</td>'+
+        '<td class="ta"><span class="badge '+ac+'">'+item.area+'</span></td>'+
+        '<td class="ti"><span class="badge '+IC[item.impact]+'">'+IL[item.impact]+'</span></td>'+
+        '<td class="tk">'+item.kpi+'</td>'+
+        '<td class="ts"><span class="est '+SC[item.status]+'"><span class="ed '+SD[item.status]+'"></span>'+SL[item.status]+'</span></td>'+
+        cells;
+      tb.appendChild(tr);
+    });
+  }
+  function rP(){
+    var tb=document.getElementById('pb'); tb.innerHTML='';
+    P.forEach(function(p){
+      var ac=p.area==='UX'?'bux2':'bpg2';
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td style="font-weight:500">'+p.name+'</td>'+
+        '<td><span class="badge '+ac+'">'+p.area+'</span></td>'+
+        '<td style="color:var(--m);font-size:12px">'+p.mes.charAt(0).toUpperCase()+p.mes.slice(1)+'</td>'+
+        '<td><span class="badge '+IC[p.impact]+'">'+IL[p.impact]+'</span></td>'+
+        '<td><span class="est '+SC[p.status]+'"><span class="ed '+SD[p.status]+'"></span>'+SL[p.status]+'</span></td>';
+      tb.appendChild(tr);
+    });
+  }
+  window.sw=function(n,el){
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+    el.classList.add('on');
+    document.getElementById('pg').classList.toggle('hidden',n!=='g');
+    document.getElementById('pp').classList.toggle('hidden',n!=='p');
+  };
+  rS(); rN(); rG(); rP();
+})();
 </script>
 </body>
 </html>
